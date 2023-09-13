@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "body-parser": "1.18.3",
-    "concurrently": "^4.1.0",
+    "concurrently": "^8.2.1",
     "express": "4.16.4",
     "nodemon": "^1.18.10",
     "sqlite3": "^4.0.7",
