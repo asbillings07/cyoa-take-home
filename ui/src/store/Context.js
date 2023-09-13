@@ -12,7 +12,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 
 const Context = createContext()
 
-export function useContext() {
+export function useAppContext() {
   const context = useContext(Context)
   if (!context) {
     throw new Error(

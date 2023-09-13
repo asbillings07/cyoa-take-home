@@ -1,4 +1,3 @@
-import React from 'react'
 import { GlobalStyle } from '../Global'
 import { MainView } from './views/MainView'
 import { Heading } from './components'

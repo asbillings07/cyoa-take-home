@@ -1,9 +1,13 @@
-import { useContext } from '../../store'
+import { useState } from 'react'
+import { useAppContext } from '../../store'
+import { useSetError } from '../../store/hooks'
 import { Card, CardContainer, Input, TextArea } from '../../components'
 
 
 export function Interaction() {
-  const { state, setIsHidden, setInteractionId } = useContext()
+  const { state, setIsHidden, setInteractionId } = useAppContext()
+  const [message, setMessage] = useState('')
+  const [error, setError] = useSetError(false, message)
 
   return (
   <CardContainer>
@@ -11,13 +15,13 @@ export function Interaction() {
         width='100%'
       >
         <Card.Title bold={true}>Name</Card.Title>
-        <Input />
+        {/* <Input /> */}
         <Card.Body>
         <TextArea
           label='Message to customer:'
           name='content'
           domID='content'
-          hasError={error}
+          // hasError={error}
           errorMessage='Field can not be submitted when empty'
           onChange={(e) => setMessage(e.target.value)}
         />

@@ -1,12 +1,12 @@
 import React from 'react'
 import { Comments } from './Comments/Comments'
 import { MainContainer } from '../components'
-import { useContext } from '../store'
+import { useAppContext } from '../store'
 import { LoadingIndicator, AlertMessage } from '../components'
 import { Interaction } from './Interactions/Interaction'
 
 export function MainView() {
-  const { loading, alert, setAlert } = useContext()
+  const { loading, alert, setAlert } = useAppContext()
   return (
     <MainContainer>
       <AlertMessage
