@@ -2,10 +2,10 @@ import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 import { useSetError } from '../../store/hooks'
 import { Modal, TextArea } from '../../components'
-import { useContext } from '../../store'
+import { useAppContext } from '../../store'
 
 export function CreateComment({ messageToggle, setMessageToggle }) {
-  const { createMessage, dispatch, interactionId, agentId } = useContext()
+  const { createMessage, dispatch, interactionId, agentId } = useAppContext()
   const [message, setMessage] = useState('')
   const [error, setError] = useSetError(false, message)
 

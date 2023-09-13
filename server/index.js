@@ -1,11 +1,25 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors')
 
 const DataAccessObject = require('./dataAccessObject');
 const Comment = require('./comment');
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3005;
+
+const whitelist = ['http://localhost:3001']
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+app.use(cors({ credentials: true, origin: corsOptions }))
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -1,11 +1,11 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot} from 'react-dom/client'
 import { Provider } from "./store";
 import { App } from './App'
+const container = document.getElementById("root");
+const root = createRoot(container);
 
-ReactDOM.render(
+root.render(
   <Provider>
     <App />
-  </Provider>,
-  document.getElementById("root")
+  </Provider>
 );
