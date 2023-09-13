@@ -1,13 +1,12 @@
 import React from 'react'
-import { Interactions } from './Interactions/Interactions'
-import { Messages } from './Messages/Messages'
-import { Notes } from './Notes/Notes'
+import { Comments } from './Comments/Comments'
 import { MainContainer } from '../components'
-import { useDunderContext } from '../store'
+import { useContext } from '../store'
 import { LoadingIndicator, AlertMessage } from '../components'
+import { Interaction } from './Interactions/Interaction'
 
 export function MainView() {
-  const { isHidden, loading, alert, setAlert } = useDunderContext()
+  const { loading, alert, setAlert } = useContext()
   return (
     <MainContainer>
       <AlertMessage
@@ -17,9 +16,8 @@ export function MainView() {
         onClose={() => setAlert((prevState) => ({ ...prevState, isOpen: false }))}
       />
       <LoadingIndicator isOpen={loading} />
-      <Interactions />
-      <Messages hidden={isHidden} />
-      <Notes hidden={isHidden} />
+      <Interaction />
+      <Comments />
     </MainContainer>
   )
 }

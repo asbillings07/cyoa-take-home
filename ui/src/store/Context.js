@@ -3,21 +3,17 @@ import { useThunkReducer } from './hooks'
 import {
   reducer,
   initialState,
-  fetchAgents,
-  fetchCustomers,
-  fetchInteractions,
-  getInteraction,
-  createMessage,
-  deleteNote,
-  editNote,
-  createNote
+  fetchComment,
+  fetchComments,
+  createComment,
+  deleteComments
 } from './reducers'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
-const DunderContext = createContext()
+const Context = createContext()
 
-export function useDunderContext() {
-  const context = useContext(DunderContext)
+export function useContext() {
+  const context = useContext(Context)
   if (!context) {
     throw new Error(
       `You can't use context state outside of a provider, check where you are using this hook.`
@@ -31,27 +27,15 @@ export function Provider({ children }) {
   const [state, dispatch] = useThunkReducer(reducer, initialState)
   const [isHidden, setIsHidden] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [interactionId, setInteractionId] = useState(null)
-  const [agentId, setAgentId] = useState(null)
   const [alert, setAlert] = useState({
     isOpen: false,
     message: '',
     alertType: 'info'
   })
 
-  const agents_customers = { agents: [...state.agents], customers: [...state.customers] }
-
   useEffect(() => {
-    dispatch(fetchInteractions())
-    dispatch(fetchCustomers())
-    dispatch(fetchAgents())
+    dispatch(fetchComments())
   }, [])
-
-  useEffect(() => {
-    if (interactionId !== null) {
-      dispatch(getInteraction(interactionId))
-    }
-  }, [interactionId])
 
   useEffect(() => {
     if (state.error) {
@@ -70,23 +54,16 @@ export function Provider({ children }) {
     alert,
     setAlert,
     dispatch,
-    getInteraction,
-    deleteNote,
-    editNote,
-    createNote,
-    createMessage,
-    agentId,
-    setAgentId,
+    fetchComment,
+    createComment,
+    deleteComments,
     isHidden,
     setIsHidden,
-    interactionId,
-    setInteractionId,
-    agents_customers,
     isModalOpen,
     setIsModalOpen
   }
 
-  return <DunderContext.Provider value={value}>{children}</DunderContext.Provider>
+  return <Context.Provider value={value}>{children}</Context.Provider>
 }
 
 Provider.propTypes = {

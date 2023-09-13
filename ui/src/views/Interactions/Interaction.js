@@ -1,40 +1,29 @@
-import React, { useState } from 'react'
-import { useDunderContext } from '../../store'
-import { Card, CardContainer } from '../../components'
-import { findById } from '../../utils'
+import { useContext } from '../../store'
+import { Card, CardContainer, Input, TextArea } from '../../components'
+
 
 export function Interaction() {
-  const { state, setIsHidden, setInteractionId } = useDunderContext()
+  const { state, setIsHidden, setInteractionId } = useContext()
 
-  const [activeId, setActiveId] = useState(null)
-
-  const runActions = (id) => {
-    setActiveId(id)
-    setInteractionId(id)
-    setIsHidden(false)
-  }
-
-  const customerInteractions = state.interactions?.map((interaction) => {
-    const { id, title, customerId } = interaction
-    const customer = findById(customerId, state.customers)
-
-    return (
-      <Card
-        id={`interaction_card${id}`}
+  return (
+  <CardContainer>
+    <Card
         width='100%'
-        key={id}
-        hovered={true}
-        selected={activeId === id}
-        onClick={() => runActions(id)}
       >
-        <Card.Title bold={true}>{title}</Card.Title>
+        <Card.Title bold={true}>Name</Card.Title>
+        <Input />
         <Card.Body>
-          <Card.Text>{customer?.name}</Card.Text>
-          <Card.Text>{customer?.email}</Card.Text>
+        <TextArea
+          label='Message to customer:'
+          name='content'
+          domID='content'
+          hasError={error}
+          errorMessage='Field can not be submitted when empty'
+          onChange={(e) => setMessage(e.target.value)}
+        />
         </Card.Body>
+        <Card.Button>Comment</Card.Button>
       </Card>
-    )
-  })
-
-  return <CardContainer>{customerInteractions}</CardContainer>
+  </CardContainer>
+  )
 }

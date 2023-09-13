@@ -1,5 +1,8 @@
 import styled from 'styled-components'
 import { StyledButton } from '../Button/style'
+import { TextInput } from '../Input/style'
+
+export const Input = TextInput
 
 export const Container = styled.div`
   display: flex;

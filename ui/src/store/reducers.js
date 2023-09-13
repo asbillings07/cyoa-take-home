@@ -1,20 +1,23 @@
 import { requestApi } from './requestApi'
 
 const ERROR = 'ERROR'
-const GETCOMMENTS = 'GETCOMMENTS'
-const CREATENEWCOMMENT = 'CREATENEWCOMMENT'
-const DELETECOMMENT = 'DELETECOMMENT'
+const GETCOMMENT = 'GETCOMMENT'
+const CREATECOMMENT = 'CREATECOMMENT'
+const DELETECOMMENTS = 'DELETECOMMENTS'
 const GETALLCOMMENTS = 'GETALLCOMMENTS'
 const LOADING = 'LOADING'
 const TOGGLESUCCESS = 'TOGGLESUCCESS'
 
+const routes = {
+'GETCOMMENT': '/getComment',
+'CREATECOMMENT': '/createComment',
+'DELETECOMMENT': '/deleteComments',
+'GETALLCOMMENTS': '/getComments'
+}
+
 export const initialState = {
-  customers: [],
-  agents: [],
-  interactions: [],
-  interaction: null,
-  notes: [],
-  messages: [],
+  comment: null,
+  comments: [],
   success: false,
   error: false,
   errorMessage: null,
@@ -23,25 +26,25 @@ export const initialState = {
 
 export const reducer = (state, action) => {
   switch (action.type) {
-    case CREATENEWCOMMENT:
+    case CREATECOMMENT:
       return {
         ...state,
         success: true,
         loading: false
       }
-    case GETCOMMENTS:
+    case GETCOMMENT:
       return {
         ...state,
-        customers: action.payload.customers,
+        comment: action.payload.comment,
         loading: false
       }
     case GETALLCOMMENTS:
       return {
         ...state,
-        interaction: action.payload.interaction,
+        comments: action.payload.comments,
         loading: false
       }
-    case DELETECOMMENT:
+    case DELETECOMMENTS:
       return {
         ...state,
         success: true,
@@ -71,88 +74,91 @@ export const reducer = (state, action) => {
 
 const errorMessage = 'ooops, looks like an error happened!'
 
-export const fetchAgents = () => async (dispatch) => {
+// export const fetchAgents = () => async (dispatch) => {
+//   dispatch({ type: LOADING })
+//   try {
+//     const res = await requestApi('/agents')
+//     dispatch({ type: GETAGENTS, payload: { agents: res.data } })
+//   } catch (err) {
+//     dispatch({ type: ERROR, payload: { error: errorMessage } })
+//   }
+// }
+
+// export const fetchCustomers = () => async (dispatch) => {
+//   dispatch({ type: LOADING })
+//   try {
+//     const res = await requestApi('/customers')
+//     dispatch({ type: GETCUSTOMERS, payload: { customers: res.data } })
+//   } catch (err) {
+//     dispatch({ type: ERROR, payload: { error: errorMessage } })
+//   }
+// }
+
+export const fetchComments = () => async (dispatch) => {
   dispatch({ type: LOADING })
   try {
-    const res = await requestApi('/agents')
-    dispatch({ type: GETAGENTS, payload: { agents: res.data } })
+    const res = await requestApi(routes.GETALLCOMMENTS)
+    dispatch({ type: GETALLCOMMENTS, payload: { comments: res.data } })
   } catch (err) {
     dispatch({ type: ERROR, payload: { error: errorMessage } })
   }
 }
 
-export const fetchCustomers = () => async (dispatch) => {
+export const fetchComment = (id) => async (dispatch) => {
   dispatch({ type: LOADING })
   try {
-    const res = await requestApi('/customers')
-    dispatch({ type: GETCUSTOMERS, payload: { customers: res.data } })
-  } catch (err) {
-    dispatch({ type: ERROR, payload: { error: errorMessage } })
-  }
-}
-export const fetchInteractions = () => async (dispatch) => {
-  dispatch({ type: LOADING })
-  try {
-    const res = await requestApi('/interactions')
-    dispatch({ type: GETINTERACTIONS, payload: { interactions: res.data } })
-  } catch (err) {
-    dispatch({ type: ERROR, payload: { error: errorMessage } })
-  }
-}
-export const getInteraction = (id) => async (dispatch) => {
-  dispatch({ type: LOADING })
-  try {
-    const res = await requestApi(`/interactions/${id}`)
-    dispatch({ type: GETINTERACTION, payload: { interaction: res.data } })
+    const res = await requestApi(routes.GETCOMMENT)
+    dispatch({ type: GETCOMMENT, payload: { comment: res.data } })
   } catch (err) {
     dispatch({ type: ERROR, payload: { error: errorMessage } })
   }
 }
 
 // @Object { agentId, content }
-export const createNote = (id, note) => async (dispatch) => {
+export const createComment = (id, note) => async (dispatch) => {
   dispatch({ type: LOADING })
   try {
-    const res = await requestApi(`/interactions/${id}/notes`, 'POST', note)
-    dispatch({ type: CREATENEWNOTE, payload: { message: res.data } })
+    const res = await requestApi(routes.CREATECOMMENT, 'POST', note)
+    dispatch({ type: CREATECOMMENT, payload: { comment: res.data } })
     dispatch({ type: TOGGLESUCCESS, payload: false })
-    dispatch(getInteraction(id)(dispatch))
-  } catch (err) {
-    dispatch({ type: ERROR, payload: { error: errorMessage } })
-  }
-}
-export const editNote = (id, note) => async (dispatch) => {
-  dispatch({ type: LOADING })
-  try {
-    const res = await requestApi(`/interactions/${id}/notes`, 'PUT', note)
-    dispatch({ type: EDITNOTE, payload: { message: res.data } })
-    dispatch({ type: TOGGLESUCCESS, payload: false })
-    dispatch(getInteraction(id)(dispatch))
+    dispatch(fetchComments(dispatch))
   } catch (err) {
     dispatch({ type: ERROR, payload: { error: errorMessage } })
   }
 }
 
-export const deleteNote = (intId, noteId) => async (dispatch) => {
+// export const editComment = (id, note) => async (dispatch) => {
+//   dispatch({ type: LOADING })
+//   try {
+//     const res = await requestApi(`/interactions/${id}/notes`, 'PUT', note)
+//     dispatch({ type: EDITCOMMENT, payload: { message: res.data } })
+//     dispatch({ type: TOGGLESUCCESS, payload: false })
+//     dispatch(getInteraction(id)(dispatch))
+//   } catch (err) {
+//     dispatch({ type: ERROR, payload: { error: errorMessage } })
+//   }
+// }
+
+export const deleteComments = () => async (dispatch) => {
   dispatch({ type: LOADING })
   try {
-    const res = await requestApi(`/interactions/${intId}/notes`, 'DELETE', noteId)
-    dispatch({ type: DELETENOTE, payload: { message: res.data } })
+    const res = await requestApi(routes.DELETECOMMENT, 'DELETE')
+    dispatch({ type: DELETECOMMENT, payload: { message: res.data } })
     dispatch({ type: TOGGLESUCCESS, payload: false })
-    dispatch(getInteraction(intId)(dispatch))
+    dispatch(fetchComments(dispatch))
   } catch (err) {
     dispatch({ type: ERROR, payload: { error: errorMessage } })
   }
 }
 // @Object { content, type: {'customer_message' || 'agent_message'}, agentId }
-export const createMessage = (id, message) => async (dispatch) => {
-  dispatch({ type: LOADING })
-  try {
-    const res = await requestApi(`/interactions/${id}/messages`, 'POST', message)
-    dispatch({ type: CREATENEWMESSAGE, payload: { message: res.data } })
-    dispatch({ type: TOGGLESUCCESS, payload: false })
-    dispatch(getInteraction(id)(dispatch))
-  } catch (err) {
-    dispatch({ type: ERROR, payload: { error: errorMessage } })
-  }
-}
+// export const createMessage = (id, message) => async (dispatch) => {
+//   dispatch({ type: LOADING })
+//   try {
+//     const res = await requestApi(`/interactions/${id}/messages`, 'POST', message)
+//     dispatch({ type: CREATENEWMESSAGE, payload: { message: res.data } })
+//     dispatch({ type: TOGGLESUCCESS, payload: false })
+//     dispatch(getInteraction(id)(dispatch))
+//   } catch (err) {
+//     dispatch({ type: ERROR, payload: { error: errorMessage } })
+//   }
+// }

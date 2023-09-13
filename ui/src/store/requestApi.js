@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
 export const requestApi = (path, method = "GET", body = null) => {
-    const url = `http://localhost:5000/api${path}`
+    const url = `http://localhost:5000${path}`
 
     const options = {
         method,

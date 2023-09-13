@@ -6,7 +6,7 @@ import { Heading } from './components'
 export function App() {
   return (
     <>
-      <Heading title='Paper Sales Company' />
+      <Heading title='Comments Feed' />
       <GlobalStyle />
       <MainView />
     </>
