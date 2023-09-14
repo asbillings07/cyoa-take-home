@@ -1,23 +1,21 @@
 import React from 'react'
-import { Comments } from './Comments/Comments'
+import { Comments } from './Comments'
 import { MainContainer } from '../components'
 import { useAppContext } from '../store'
 import { LoadingIndicator, AlertMessage } from '../components'
-import { Interaction } from './Interactions/Interaction'
 
 export function MainView() {
-  const { loading, alert, setAlert } = useAppContext()
+  const { state, alert, setAlert, isHidden } = useAppContext()
   return (
-    <MainContainer>
+    <MainContainer commentsHidden={isHidden}>
       <AlertMessage
         isOpen={alert.isOpen}
         message={alert.message}
         alertType={alert.alertType}
         onClose={() => setAlert((prevState) => ({ ...prevState, isOpen: false }))}
       />
-      <LoadingIndicator isOpen={loading} />
-      <Interaction />
-      <Comments />
+      <LoadingIndicator isOpen={state.loading} />
+      <Comments hidden={isHidden} />
     </MainContainer>
   )
 }

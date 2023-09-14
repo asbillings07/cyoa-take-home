@@ -5,6 +5,8 @@ export const StyledButton = styled.button`
   justify-content: center;
   margin-top: 10px;
   font-size: 20px;
+  width: ${({ width }) => width};
+  align-self: ${({ alignSelf }) => alignSelf};
   &:hover {
     ${elevation[2]};
     cursor: pointer;

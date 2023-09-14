@@ -9,7 +9,7 @@ export function Modal({ classes, toggle, setToggle, children, ...restProps }) {
     ? ReactDOM.createPortal(
         <Container className={classNames('modal', classes)} {...restProps}>
           <Inner>
-            <Close onClick={() => setToggle(!toggle)} />
+            <Close className={classNames('modal_close_button', classes)} onClick={() => setToggle(!toggle)} />
             {children}
           </Inner>
         </Container>,

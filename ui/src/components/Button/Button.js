@@ -5,9 +5,12 @@ import classNames from 'classnames'
 
 export function Button({
   classes,
-  buttonType = 'standard',
+  buttonType,
   name = null,
   disabled = false,
+  width = '80%',
+  id='',
+  alignSelf = 'auto',
   type = 'button',
   size = 'small',
   onClick = () => false,
@@ -15,12 +18,15 @@ export function Button({
 }) {
   return (
     <StyledButton
+      id={ id ? `${id}_button` : ''}
       disabled={disabled}
+      width={width}
+      alignSelf={alignSelf}
       size={size}
       type={type}
       buttonType={buttonType}
       onClick={onClick}
-      className={classNames(`${buttonType}_button`, classes)}
+      className={classNames(`${id}_button`, classes)}
       {...restProps}
     >
       {name}

@@ -26,7 +26,7 @@ export function TextArea({
 
   return (
     <ErrorWrapper hasError={hasError}>
-      {label ? <TextAreaLabel htmlFor={domID}>{label}</TextAreaLabel> : null}
+      {label ? <TextAreaLabel id={`${name}_label`} htmlFor={domID}>{label}</TextAreaLabel> : null}
 
       <StyledTextArea
         id={domID}

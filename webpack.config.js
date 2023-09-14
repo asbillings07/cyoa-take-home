@@ -3,7 +3,7 @@ const { join, resolve } = require('path')
 
 module.exports = ({ mode } = { mode: 'production' }) => ({
   mode,
-  entry: join(__dirname, 'src', 'index.js'),
+  entry: join(__dirname, 'ui', 'src', 'index.js'),
   output: {
     filename: 'bundle.js'
   },
@@ -18,7 +18,7 @@ module.exports = ({ mode } = { mode: 'production' }) => ({
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: resolve(__dirname, 'src', 'index.html')
+      template: resolve(__dirname, 'ui', 'src', 'index.html')
     })
   ],
   devtool: 'eval-cheap-module-source-map',

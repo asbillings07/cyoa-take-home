@@ -23,7 +23,7 @@ export function Input({
 
   return (
     <ErrorWrapper hasError={hasError}>
-      {label ? <InputLabel htmlFor={domID} {...restProps}>{label}</InputLabel> : null}
+      {label ? <InputLabel id={`${name}_label`} htmlFor={domID} {...restProps}>{label}</InputLabel> : null}
 
       <TextInput
         id={domID}

@@ -1,13 +1,32 @@
 import styled from 'styled-components'
 import { Button } from '../Button/Button'
+import { above } from '../../utils'
 
 export const Alert = styled.div`
   display: flex;
   padding: 15px;
   width: 50%;
   position: fixed;
-  top: 54px;
-  left: 20em;
+  top: 3.5em;
+  left: 6em;
+  ${above.small`
+    top: 4em;
+    left: 7em;
+  `}
+  ${above.medSmall`
+    top: 4em;
+    left: 10em;
+  `}
+  ${above.med`
+    top: 4em;
+    left: 15em;
+  `}
+
+  ${above.large`
+    top: 4em;
+    left: 18em;
+  `}
+
   margin: 5px 5px 5px 5px;
   justify-content: space-between;
   margin-top: 8px;
