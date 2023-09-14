@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import { elevation, absolute } from '../../utils'
+import { elevation } from '../../utils'
 export const StyledButton = styled.button`
   padding: 5px 15px;
-  margin-right: 10px;
   justify-content: center;
+  margin-top: 10px;
   font-size: 20px;
   &:hover {
     ${elevation[2]};
@@ -18,13 +18,12 @@ export const StyledButton = styled.button`
       }
       case 'medium': {
         return `font-size: 16px;
-                
+                margin-top: 20px;
         `
       }
-      case 'dunder': {
-        return `
-        font-size: 15px;
-        ${absolute({ yProp: 'bottom', xProp: 'left', y: '15px', x: '25px' })}
+      case 'large': {
+        return `font-size: 24px;
+                margin-top: 30px;
         `
       }
       case 'standard': {

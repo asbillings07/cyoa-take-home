@@ -16,9 +16,17 @@ export const TextInput = styled.input`
   &:hover {
     border: 1px solid lightgray;
   }
-  ${above.med`
+
+    ${above.small`
+  width: 30em;
+  `}
+    ${above.medSmall`
+  width: 40em;
+  `}
+    ${above.med`
   width: 50em;
   `}
+
   ${above.large`
   width: 70em;
   `}
@@ -27,7 +35,7 @@ export const InputLabel = styled.label`
   display: block;
   margin-top: 10px;
   margin-bottom: 0.3em;
-  color: white;
+  color: ${({ textColor }) => ( textColor ? textColor : 'lightgrey')};
   ${typography('medium')}
   ${typography('letterSpacing')}
   ${typography('bold')}
@@ -41,4 +49,19 @@ export const ErrorMessage = styled.span`
   ${typography('small')}
   ${typography('defaultLineHeight')}
   margin-bottom: 1.5em;
+`
+export const Wrapper = styled.div`
+  position: relative;
+  ${({ hasError }) =>
+    hasError
+      ? `
+    label {
+      color: red;
+    }
+    textarea {
+      border: 1px solid red;
+      box-shadow: 0 0 0 1px red;
+      margin-bottom: 0.5em;
+    }`
+      : ''}
 `

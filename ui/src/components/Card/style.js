@@ -42,10 +42,12 @@ export const Body = styled.div`
 export const Title = styled.h1`
   font-size: 12px;
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
+  align-self: ${({ center }) => (center ? 'center' : 'auto')};
   margin: 0;
 `
 
 export const Text = styled.p`
+  align-self: ${({ center }) => (center ? 'center' : 'auto')};
   font-size: 12px;
   line-height: 16px;
   color: black;

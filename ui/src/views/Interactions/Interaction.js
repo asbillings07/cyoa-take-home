@@ -5,28 +5,51 @@ import { Card, CardContainer, Input, TextArea } from '../../components'
 
 
 export function Interaction() {
-  const { state, setIsHidden, setInteractionId } = useAppContext()
-  const [message, setMessage] = useState('')
-  const [error, setError] = useSetError(false, message)
+  const initialState = {
+    name: '',
+    comment: ''
+  }
+  const { state, createComment, dispatch } = useAppContext()
+  const [interactionState, setInteractionState] = useState(initialState) 
+  const [nameError, useRefName] = useSetError(false, interactionState.name)
+  const [commentError, useRefComment] = useSetError(false, interactionState.comment)
 
+  const createNewComment = (commentState) => {
+    useRefComment(true)
+    useRefName(true)
+
+    if (!error) {
+      dispatch(createComment(commentState))
+      setInteractionState(initialState)
+    }
+  }
+  
   return (
   <CardContainer>
     <Card
         width='100%'
       >
-        <Card.Title bold={true}>Name</Card.Title>
-        {/* <Input /> */}
+        <Input
+          placeholder='Enter your name'
+          label='Name'
+          domID='name'
+          name='name'
+          textColor='black'
+          hasError={nameError}
+          errorMessage='Field can not be submitted when empty'
+          onChange={(e) => setInteractionState({...interactionState, name: e.target.value})}
+        />
         <Card.Body>
         <TextArea
-          label='Message to customer:'
+          label='Enter your comment:'
           name='content'
           domID='content'
-          // hasError={error}
+          hasError={commentError}
           errorMessage='Field can not be submitted when empty'
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={(e) => setInteractionState({...interactionState, comment: e.target.value})}
         />
         </Card.Body>
-        <Card.Button>Comment</Card.Button>
+        <Card.Button onClick={() => createNewComment(interactionState)} size='medium'>Comment</Card.Button>
       </Card>
   </CardContainer>
   )

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { InputLabel, TextInput } from './style'
+import { ErrorWrapper, ErrorMessage } from '../Error/styles'
 
 export function Input({
   placeholder = '',
@@ -8,18 +9,21 @@ export function Input({
   defaultValue = null,
   label = null,
   type = 'text',
+  errorMessage = '',
+  hasError = null,
   domID = null,
   disabled = false,
   name = null,
-  onChange = () => false
+  onChange = () => false,
+  ...restProps
 }) {
   if (label && !domID) {
     console.warn('Please enter a valid "domID" prop into Input component')
   }
 
   return (
-    <div>
-      {label ? <InputLabel htmlFor={domID}>{label}</InputLabel> : null}
+    <ErrorWrapper hasError={hasError}>
+      {label ? <InputLabel htmlFor={domID} {...restProps}>{label}</InputLabel> : null}
 
       <TextInput
         id={domID}
@@ -30,8 +34,10 @@ export function Input({
         placeholder={placeholder}
         onChange={onChange}
         disabled={disabled}
+        {...restProps}
       />
-    </div>
+      {hasError ? <ErrorMessage>{errorMessage}</ErrorMessage> : null}
+    </ErrorWrapper>
   )
 }
 

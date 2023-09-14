@@ -4,18 +4,18 @@ import { belowHeight } from '../../utils'
 export const MainContainer = styled.div`
   display: flex;
   padding: 40px;
-  height: 85vh;
-  justify-content: space-between;
+  height: 100%;
+  justify-content: center;
 `
 export const CardContainer = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 41em;
+  max-height: 100%;
   ${belowHeight.medLarge` 
-max-height: 24em;
+max-height: 75%;
   `}
   ${belowHeight.medSmall` 
-max-height: 21em;
+max-height: 50%;
   `}
 `
 export const StyledComponentContainer = styled.div`

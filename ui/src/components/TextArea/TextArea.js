@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { StyledTextArea, TextAreaLabel, ErrorMessage, Wrapper } from './style'
+import { StyledTextArea, TextAreaLabel } from './style'
+import { ErrorMessage, ErrorWrapper } from '../Error/styles'
 
 export function TextArea({
   label = null,
@@ -24,7 +25,7 @@ export function TextArea({
   }
 
   return (
-    <Wrapper hasError={hasError}>
+    <ErrorWrapper hasError={hasError}>
       {label ? <TextAreaLabel htmlFor={domID}>{label}</TextAreaLabel> : null}
 
       <StyledTextArea
@@ -42,7 +43,7 @@ export function TextArea({
         disabled={disabled}
       />
       {hasError ? <ErrorMessage>{errorMessage}</ErrorMessage> : null}
-    </Wrapper>
+    </ErrorWrapper>
   )
 }
 

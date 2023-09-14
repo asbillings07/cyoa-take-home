@@ -9,7 +9,7 @@ export function Button({
   name = null,
   disabled = false,
   type = 'button',
-  size = 'dunder',
+  size = 'small',
   onClick = () => false,
   ...restProps
 }) {

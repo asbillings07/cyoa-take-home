@@ -115,10 +115,10 @@ export const fetchComment = (id) => async (dispatch) => {
 }
 
 // @Object { agentId, content }
-export const createComment = (id, note) => async (dispatch) => {
+export const createComment = ({name, comment}) => async (dispatch) => {
   dispatch({ type: LOADING })
   try {
-    const res = await requestApi(routes.CREATECOMMENT, 'POST', note)
+    const res = await requestApi(routes.CREATECOMMENT, 'POST', { name, message: comment })
     dispatch({ type: CREATECOMMENT, payload: { comment: res.data } })
     dispatch({ type: TOGGLESUCCESS, payload: false })
     dispatch(fetchComments(dispatch))
