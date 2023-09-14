@@ -3,7 +3,7 @@ import { elevation } from '../../utils'
 export const StyledButton = styled.button`
   padding: 5px 15px;
   justify-content: center;
-  margin-top: 10px;
+  margin: 10px 0;
   font-size: 20px;
   width: ${({ width }) => width};
   align-self: ${({ alignSelf }) => alignSelf};
@@ -20,12 +20,12 @@ export const StyledButton = styled.button`
       }
       case 'medium': {
         return `font-size: 16px;
-                margin-top: 20px;
+                margin: 20px 0;
         `
       }
       case 'large': {
         return `font-size: 24px;
-                margin-top: 30px;
+                margin: 30px 0;
         `
       }
       case 'standard': {
