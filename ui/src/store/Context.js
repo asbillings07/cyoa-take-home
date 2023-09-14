@@ -38,8 +38,14 @@ export function Provider({ children }) {
   }, [])
 
   useEffect(() => {
+    if (state.comments) {
+      setIsHidden(false)
+    }
+  }, [state.comments])
+
+  useEffect(() => {
     if (state.error) {
-      console.log(state.errorMessage)
+      console.error(state.errorMessage)
       setAlert((prevState) => ({
         ...prevState,
         isOpen: true,

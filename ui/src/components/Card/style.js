@@ -8,7 +8,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   min-width: 0;
-  max-width: 1000px;
+  max-width: 100%;
   width: ${({ width }) => width};
   word-wrap: break-word;
   ${({ selected }) =>
@@ -33,20 +33,19 @@ export const Container = styled.div`
 `
 
 export const Body = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  min-height: 1px; */
+${({ styles }) => (styles ? styles : null)};
 `
 
 export const Title = styled.h1`
-  font-size: 12px;
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : '12px')};
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
+  align-self: ${({ center }) => (center ? 'center' : 'auto')};
   margin: 0;
 `
 
 export const Text = styled.p`
-  font-size: 12px;
+  align-self: ${({ center }) => (center ? 'center' : 'auto')};
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : '12px')};
   line-height: 16px;
   color: black;
   opacity: 0.9;

@@ -1,24 +1,23 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import classNames from 'classnames'
-import { Title, InteractionContainer, MessagesContainer, NotesContainer } from '..'
+import { Title, InteractionContainer, MessagesContainer } from '..'
 
 const componentMap = {
   Interactions: InteractionContainer,
-  Messages: MessagesContainer,
-  Notes: NotesContainer
+  Comments: MessagesContainer,
 }
 
-export function ComponentContainer({ classes, title, children, ...restProps }) {
+export function ComponentContainer({ classes, title, children, hidden, ...restProps }) {
   const Container = componentMap[title]
-  return (
+  return !hidden ? (
     <>
       <Container className={classNames(`${title}_container`, classes)} {...restProps}>
         <Title>{title}</Title>
         {children}
       </Container>
     </>
-  )
+  ) : null
 }
 
 ComponentContainer.propTypes = {
