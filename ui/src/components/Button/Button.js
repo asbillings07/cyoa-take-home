@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
-import React from 'react'
 import { StyledButton } from './style'
 import classNames from 'classnames'
 
 export function Button({
+  loading = false,
   classes,
   buttonType,
   name = null,

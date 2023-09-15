@@ -19,7 +19,7 @@ export function Comments({ hidden }) {
   return (
     <>
       <ComponentContainer hidden={hidden} id='comment_container' flexGrow={1} title='Comments'>
-        <Button id='create_new_comment' alignSelf='center' width='25%' type='button' size='medium' name="Add comment" onClick={() => setToggleModal(true)} />
+        <Button loading={state.loading} disabled={state.loading} id='create_new_comment' alignSelf='center' width='25%' type='button' size='medium' name="Add comment" onClick={() => setToggleModal(true)} />
         {comments.length ? comments : emptyCommentDiv }
       </ComponentContainer>
       <CreateComment messageToggle={toggleModal} setMessageToggle={setToggleModal}/>

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { elevation } from '../../utils'
+
 export const StyledButton = styled.button`
   padding: 5px 15px;
   justify-content: center;
@@ -10,6 +11,11 @@ export const StyledButton = styled.button`
   &:hover {
     ${elevation[2]};
     cursor: pointer;
+  }
+  &:disabled {
+    background: #e7e8e9;
+    color: #9fa3a9;
+    cursor: not-allowed;
   }
 
   ${({ size }) => {
