@@ -21,7 +21,7 @@ module.exports = ({ mode } = { mode: 'production' }) => ({
       template: resolve(__dirname, 'ui', 'src', 'index.html')
     })
   ],
-  devtool: 'eval-cheap-module-source-map',
+  devtool: 'source-map',
   devServer: {
     host: '0.0.0.0',
     port: 3000
