@@ -64,3 +64,12 @@ We recommend spending up to four hours on this assignment. If you don't get ever
 $ npm install
 $ npm run dev
 ```
+
+### Testing
+```
+// to start the application
+$ npm run dev
+// to start cypress
+$ npm run test 
+
+```
